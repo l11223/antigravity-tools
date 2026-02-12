@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Save, Github, User, MessageCircle, ExternalLink, RefreshCw, Heart, Coffee, LayoutDashboard, Users, Network, Activity, BarChart3, Settings as SettingsIcon, Lock, CheckCircle2, Globe } from 'lucide-react';
+import { Save, Github, User, MessageCircle, ExternalLink, RefreshCw, Heart, LayoutDashboard, Users, Network, Activity, BarChart3, Settings as SettingsIcon, Lock, CheckCircle2, Globe } from 'lucide-react';
 import { request as invoke } from '../utils/request';
 import { open } from '@tauri-apps/plugin-dialog';
 import { useConfigStore } from '../stores/useConfigStore';
@@ -1476,7 +1476,7 @@ function Settings() {
                     <div className="modal-box relative max-w-2xl bg-white dark:bg-base-100 shadow-2xl rounded-3xl p-0 overflow-hidden transform transition-all animate-in fade-in zoom-in-95 duration-300">
                         <div className="flex flex-col items-center p-8">
                             <div className="w-16 h-16 bg-pink-50 dark:bg-pink-900/20 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
-                                <Coffee className="w-8 h-8 text-pink-500" />
+                                <Heart className="w-8 h-8 text-pink-500" />
                             </div>
 
                             <h3 className="text-2xl font-black text-gray-900 dark:text-base-content mb-3">{t('settings.about.support_title')}</h3>
@@ -1484,31 +1484,28 @@ function Settings() {
                                 {t('settings.about.support_desc')}
                             </p>
 
-                            {/* QR Codes Grid */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-8">
-                                {/* Alipay */}
-                                <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-gray-50 dark:bg-base-200 border border-gray-100 dark:border-base-300">
-                                    <div className="w-full aspect-square relative bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
-                                        <img src="/images/donate/alipay.png" alt="Alipay" className="w-full h-full object-contain" />
-                                    </div>
-                                    <span className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('settings.about.support_alipay')}</span>
-                                </div>
-
-                                {/* WeChat */}
-                                <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-gray-50 dark:bg-base-200 border border-gray-100 dark:border-base-300">
-                                    <div className="w-full aspect-square relative bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
-                                        <img src="/images/donate/wechat.png" alt="WeChat" className="w-full h-full object-contain" />
-                                    </div>
-                                    <span className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('settings.about.support_wechat')}</span>
-                                </div>
-
-                                {/* Buy Me a Coffee */}
-                                <div className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-gray-50 dark:bg-base-200 border border-gray-100 dark:border-base-300">
-                                    <div className="w-full aspect-square relative bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
-                                        <img src="/images/donate/coffee.png" alt="Buy Me A Coffee" className="w-full h-full object-contain" />
-                                    </div>
-                                    <span className="text-xs font-bold text-gray-700 dark:text-gray-300">{t('settings.about.support_buymeacoffee')}</span>
-                                </div>
+                            {/* GitHub & Community Links */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-8">
+                                <a
+                                    href="https://github.com/l11223/antigravity-tools"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-gray-50 dark:bg-base-200 border border-gray-100 dark:border-base-300 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-md transition-all cursor-pointer group"
+                                >
+                                    <Github className="w-10 h-10 text-gray-700 dark:text-gray-300 group-hover:text-blue-500 transition-colors" />
+                                    <span className="text-sm font-bold text-gray-700 dark:text-gray-300">⭐ Star on GitHub</span>
+                                    <span className="text-xs text-gray-400">给个 Star 就是最大的支持</span>
+                                </a>
+                                <a
+                                    href="https://github.com/l11223/antigravity-tools/issues"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-gray-50 dark:bg-base-200 border border-gray-100 dark:border-base-300 hover:border-green-300 dark:hover:border-green-600 hover:shadow-md transition-all cursor-pointer group"
+                                >
+                                    <MessageCircle className="w-10 h-10 text-gray-700 dark:text-gray-300 group-hover:text-green-500 transition-colors" />
+                                    <span className="text-sm font-bold text-gray-700 dark:text-gray-300">💬 Feedback</span>
+                                    <span className="text-xs text-gray-400">提交 Issue 或功能建议</span>
+                                </a>
                             </div>
 
                             <button
