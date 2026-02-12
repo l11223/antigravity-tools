@@ -23,6 +23,7 @@ pub struct ProxyRequestLog {
     pub output_tokens: Option<u32>,
     pub protocol: Option<String>,     // 协议类型: "openai", "anthropic", "gemini"
     pub username: Option<String>,     // User token username
+    pub client_source: Option<String>, // 请求来源标识: "cursor", "claude-code", "opencode", "unknown"
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -179,6 +180,7 @@ impl ProxyMonitor {
                 output_tokens: log.output_tokens,
                 protocol: log.protocol.clone(),
                 username: log.username.clone(),
+                client_source: log.client_source.clone(),
             };
             let _ = app.emit("proxy://request", &log_summary);
         }

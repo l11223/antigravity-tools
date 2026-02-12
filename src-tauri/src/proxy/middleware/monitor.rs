@@ -32,6 +32,32 @@ fn record_user_token_usage(
         );
     }
 }
+/// Detect the client source from request headers.
+/// Returns "cursor" if the request comes from Cursor editor,
+/// "claude-code" for Claude Code, "opencode" for OpenCode, or "unknown".
+fn detect_client_source(headers: &axum::http::HeaderMap) -> String {
+    // Check User-Agent for known client keywords
+    if let Some(ua) = headers.get("user-agent").and_then(|v| v.to_str().ok()) {
+        let ua_lower: String = ua.to_lowercase();
+        if ua_lower.contains("cursor") {
+            return "cursor".to_string();
+        }
+        if ua_lower.contains("claude-code") {
+            return "claude-code".to_string();
+        }
+        if ua_lower.contains("opencode") {
+            return "opencode".to_string();
+        }
+    }
+    // Check for Cursor-specific headers (x-cursor-* prefix)
+    for key in headers.keys() {
+        if key.as_str().starts_with("x-cursor") {
+            return "cursor".to_string();
+        }
+    }
+    "unknown".to_string()
+}
+
 
 pub async fn monitor_middleware(
     State(state): State<AppState>,
@@ -70,6 +96,9 @@ pub async fn monitor_middleware(
         .get("user-agent")
         .and_then(|v| v.to_str().ok())
         .map(|s| s.to_string());
+
+    // Detect client source from headers (must be done before request body is consumed)
+    let client_source = detect_client_source(request.headers());
 
     let mut model = if uri.contains("/v1beta/models/") {
         uri.split("/v1beta/models/")
@@ -173,6 +202,7 @@ pub async fn monitor_middleware(
         output_tokens: None,
         protocol,
         username,
+        client_source: Some(client_source),
     };
 
 

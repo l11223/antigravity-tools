@@ -1057,6 +1057,44 @@
             },
             "sync_confirm_title": "同步确认",
             "sync_confirm_message": "即将为您同步 {{name}} 的配置。⚠️ 注意：此操作将覆盖您本地已有的配置文件（如登录状态、API Key 等）。确定要继续吗？"
+        },
+        "cursor_sync": {
+            "card_title": "Cursor 编辑器",
+            "status": {
+                "detecting": "检测中...",
+                "installed": "已安装",
+                "not_installed": "未检测到",
+                "synced": "已连接",
+                "not_synced": "未同步",
+                "current_base_url": "Base URL",
+                "backup": "备份",
+                "backup_exists": "已备份",
+                "no_backup": "无备份"
+            },
+            "btn_sync": "一键同步配置",
+            "btn_resync": "重新同步",
+            "btn_view": "查看配置",
+            "btn_restore": "恢复备份",
+            "btn_restore_backup": "恢复备份",
+            "toast": {
+                "config_missing": "请先生成 API Key 并启动服务",
+                "sync_success": "Cursor 配置同步成功",
+                "sync_error": "同步失败: {{error}}",
+                "restore_success": "Cursor 配置恢复成功",
+                "restore_error": "恢复失败: {{error}}"
+            },
+            "modal": {
+                "view_title": "Cursor 配置文件",
+                "copy_success": "已复制"
+            },
+            "restore_backup_confirm": "检测到备份文件，确定要恢复到同步前的配置吗？",
+            "restore_confirm": "确定要恢复 Cursor 的默认配置吗？",
+            "sync_confirm_title": "同步确认",
+            "sync_confirm_message": "即将同步 Cursor 编辑器配置。⚠️ 注意：此操作将覆盖您现有的 Cursor AI 代理设置。确定要继续吗？",
+            "preset_import_success": "Cursor 预设已导入：{{count}} 个映射已应用",
+            "preset_import_error": "导入失败: {{error}}",
+            "import_preset_title": "导入 Cursor 模型映射预设",
+            "import_preset_btn": "Cursor 预设"
         }
     },
     "monitor": {
@@ -1083,13 +1121,17 @@
             "images": "绘图",
             "reset": "重置",
             "by_account": "按账号筛选",
-            "all_accounts": "全部账号"
+            "all_accounts": "全部账号",
+            "by_source": "按来源筛选",
+            "all_sources": "全部来源",
+            "unknown_source": "未知"
         },
         "table": {
             "status": "状态",
             "method": "方法",
             "model": "模型",
             "protocol": "协议",
+            "source": "来源",
             "account": "账号",
             "path": "路径",
             "usage": "Token 消耗",
@@ -1107,6 +1149,7 @@
             "model": "使用模型",
             "mapped_model": "映射模型",
             "protocol": "请求协议",
+            "source": "请求来源",
             "account_used": "使用账号",
             "id": "请求 ID",
             "payload_empty": "无数据"

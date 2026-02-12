@@ -255,6 +255,7 @@ pub async fn handle_warmup(
                 output_tokens: Some(0),
                 protocol: Some("warmup".to_string()),
                 username: None,
+                client_source: Some("internal".to_string()),
             };
             state.monitor.log_request(log).await;
 
@@ -335,6 +336,7 @@ pub async fn handle_warmup(
                 output_tokens: None,
                 protocol: Some("warmup".to_string()),
                 username: None,
+                client_source: Some("internal".to_string()),
             };
             state.monitor.log_request(log).await;
 

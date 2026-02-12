@@ -958,6 +958,44 @@
                 "sync_error": "同步 {{name}} 失敗: {{error}}"
             }
         },
+        "cursor_sync": {
+            "card_title": "Cursor 編輯器",
+            "status": {
+                "detecting": "偵測中...",
+                "installed": "已安裝",
+                "not_installed": "未偵測到",
+                "synced": "已連接",
+                "not_synced": "未同步",
+                "current_base_url": "Base URL",
+                "backup": "備份",
+                "backup_exists": "已備份",
+                "no_backup": "無備份"
+            },
+            "btn_sync": "一鍵同步配置",
+            "btn_resync": "重新同步",
+            "btn_view": "檢視配置",
+            "btn_restore": "恢復備份",
+            "btn_restore_backup": "恢復備份",
+            "toast": {
+                "config_missing": "請先生成 API Key 並啟動服務",
+                "sync_success": "Cursor 配置同步成功",
+                "sync_error": "同步失敗: {{error}}",
+                "restore_success": "Cursor 配置已恢復",
+                "restore_error": "恢復失敗: {{error}}"
+            },
+            "modal": {
+                "view_title": "Cursor 配置檔案",
+                "copy_success": "已複製"
+            },
+            "restore_backup_confirm": "偵測到備份檔案，確定要恢復到同步前的配置嗎？",
+            "restore_confirm": "確定要恢復 Cursor 的預設配置嗎？",
+            "sync_confirm_title": "同步確認",
+            "sync_confirm_message": "即將同步 Cursor 編輯器配置。⚠️ 注意：此操作將覆蓋您現有的 Cursor AI 代理設定。確定要繼續嗎？",
+            "preset_import_success": "Cursor 預設已匯入：{{count}} 個映射已套用",
+            "preset_import_error": "匯入失敗: {{error}}",
+            "import_preset_title": "匯入 Cursor 模型映射預設",
+            "import_preset_btn": "Cursor 預設"
+        },
         "supported_models": {
             "title": "支援模型與整合 (Supported Models & Integration)",
             "model_name": "模型名稱",
@@ -990,13 +1028,17 @@
             "images": "繪圖",
             "reset": "重置",
             "by_account": "按帳號篩選",
-            "all_accounts": "全部帳號"
+            "all_accounts": "全部帳號",
+            "by_source": "按來源篩選",
+            "all_sources": "全部來源",
+            "unknown_source": "未知"
         },
         "table": {
             "status": "狀態",
             "method": "方法",
             "model": "模型",
             "protocol": "協定",
+            "source": "來源",
             "account": "帳號",
             "path": "路徑",
             "usage": "Token 消耗",
@@ -1014,6 +1056,7 @@
             "model": "使用模型",
             "id": "請求 ID",
             "protocol": "協定類型",
+            "source": "請求來源",
             "mapped_model": "路由後模型",
             "account_used": "使用帳號",
             "payload_empty": "無封包資料"

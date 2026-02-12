@@ -3,7 +3,7 @@ import { listen } from '@tauri-apps/api/event';
 import ModalDialog from '../common/ModalDialog';
 import { useTranslation } from 'react-i18next';
 import { request as invoke } from '../../utils/request';
-import { Trash2, Search, X, Copy, CheckCircle, ChevronLeft, ChevronRight, RefreshCw, User } from 'lucide-react';
+import { Trash2, Search, X, Copy, CheckCircle, ChevronLeft, ChevronRight, RefreshCw, User, Layers } from 'lucide-react';
 
 import { AppConfig } from '../../types/config';
 import { formatCompactNumber } from '../../utils/format';
@@ -28,6 +28,7 @@ interface ProxyRequestLog {
     output_tokens?: number;
     account_email?: string;
     protocol?: string;  // "openai" | "anthropic" | "gemini"
+    client_source?: string; // "cursor" | "claude-code" | "opencode" | "unknown"
 }
 
 interface ProxyStats {
@@ -48,6 +49,20 @@ interface LogTableProps {
     t: any;
 }
 
+const SOURCE_BADGE_STYLES: Record<string, string> = {
+    cursor: 'bg-cyan-500',
+    'claude-code': 'bg-purple-500',
+    opencode: 'bg-amber-500',
+    unknown: 'bg-gray-400',
+};
+
+const SOURCE_LABELS: Record<string, string> = {
+    cursor: 'Cursor',
+    'claude-code': 'Claude Code',
+    opencode: 'OpenCode',
+    unknown: 'Unknown',
+};
+
 const LogTable: React.FC<LogTableProps> = ({
     logs,
     loading,
@@ -65,6 +80,7 @@ const LogTable: React.FC<LogTableProps> = ({
                         <th style={{ width: '60px' }}>{t('monitor.table.method')}</th>
                         <th style={{ width: '220px' }}>{t('monitor.table.model')}</th>
                         <th style={{ width: '70px' }}>{t('monitor.table.protocol')}</th>
+                        <th style={{ width: '80px' }}>{t('monitor.table.source', { defaultValue: 'Source' })}</th>
                         <th style={{ width: '140px' }}>{t('monitor.table.account')}</th>
                         <th style={{ width: '180px' }}>{t('monitor.table.path')}</th>
                         <th className="text-right" style={{ width: '90px' }}>{t('monitor.table.usage')}</th>
@@ -99,6 +115,13 @@ const LogTable: React.FC<LogTableProps> = ({
                                         {log.protocol === 'openai' ? 'OpenAI' :
                                             log.protocol === 'anthropic' ? 'Claude' :
                                                 log.protocol === 'gemini' ? 'Gemini' : log.protocol}
+                                    </span>
+                                )}
+                            </td>
+                            <td style={{ width: '80px' }}>
+                                {log.client_source && (
+                                    <span className={`badge badge-xs text-white border-none ${SOURCE_BADGE_STYLES[log.client_source] || SOURCE_BADGE_STYLES.unknown}`}>
+                                        {SOURCE_LABELS[log.client_source] || log.client_source}
                                     </span>
                                 )}
                             </td>
@@ -144,9 +167,11 @@ export const ProxyMonitor: React.FC<ProxyMonitorProps> = ({ className }) => {
     const [stats, setStats] = useState<ProxyStats>({ total_requests: 0, success_count: 0, error_count: 0 });
     const [filter, setFilter] = useState('');
     const [accountFilter, setAccountFilter] = useState('');
+    const [sourceFilter, setSourceFilter] = useState('');
     // [FIX] 使用 ref 存储最新的筛选条件，避免 setInterval 闭包问题
     const filterRef = useRef(filter);
     const accountFilterRef = useRef(accountFilter);
+    const sourceFilterRef = useRef(sourceFilter);
     const currentPageRef = useRef(1);
     const [selectedLog, setSelectedLog] = useState<ProxyRequestLog | null>(null);
     const [isLoggingEnabled, setIsLoggingEnabled] = useState(false);
@@ -393,15 +418,22 @@ export const ProxyMonitor: React.FC<ProxyMonitorProps> = ({ className }) => {
         // [FIX] 同步 ref 值，供 setInterval 使用
         filterRef.current = filter;
         accountFilterRef.current = accountFilter;
+        sourceFilterRef.current = sourceFilter;
         currentPageRef.current = 1;
-    }, [filter, accountFilter]);
+    }, [filter, accountFilter, sourceFilter]);
 
     // Logs are already filtered and sorted by backend
-    // Apply account filter on frontend
+    // Apply account filter and source filter on frontend
     const filteredLogs = useMemo(() => {
-        if (!accountFilter) return logs;
-        return logs.filter(log => log.account_email === accountFilter);
-    }, [logs, accountFilter]);
+        let result = logs;
+        if (accountFilter) {
+            result = result.filter(log => log.account_email === accountFilter);
+        }
+        if (sourceFilter) {
+            result = result.filter(log => log.client_source === sourceFilter);
+        }
+        return result;
+    }, [logs, accountFilter, sourceFilter]);
 
     const quickFilters = [
         { label: t('monitor.filters.all'), value: '' },
@@ -491,6 +523,22 @@ export const ProxyMonitor: React.FC<ProxyMonitorProps> = ({ className }) => {
                         </select>
                     </div>
 
+                    <div className="relative">
+                        <Layers className="absolute left-2.5 top-2 text-gray-400 z-10" size={14} />
+                        <select
+                            className="select select-sm select-bordered pl-8 text-xs min-w-[120px]"
+                            value={sourceFilter}
+                            onChange={(e) => setSourceFilter(e.target.value)}
+                            title={t('monitor.filters.by_source', { defaultValue: 'Filter by source' })}
+                        >
+                            <option value="">{t('monitor.filters.all_sources', { defaultValue: 'All Sources' })}</option>
+                            <option value="cursor">Cursor</option>
+                            <option value="claude-code">Claude Code</option>
+                            <option value="opencode">OpenCode</option>
+                            <option value="unknown">{t('monitor.filters.unknown_source', { defaultValue: 'Unknown' })}</option>
+                        </select>
+                    </div>
+
                     <div className="hidden lg:flex gap-4 text-[10px] font-bold uppercase">
                         <span className="text-blue-500">{formatCompactNumber(stats.total_requests)} {t('monitor.stats.total')}</span>
                         <span className="text-green-500">{formatCompactNumber(stats.success_count)} {t('monitor.stats.ok')}</span>
@@ -512,7 +560,7 @@ export const ProxyMonitor: React.FC<ProxyMonitorProps> = ({ className }) => {
                             {q.label}
                         </button>
                     ))}
-                    {(filter || accountFilter) && <button onClick={() => { setFilter(''); setAccountFilter(''); }} className="text-[10px] text-blue-500"> {t('monitor.filters.reset')} </button>}
+                    {(filter || accountFilter || sourceFilter) && <button onClick={() => { setFilter(''); setAccountFilter(''); setSourceFilter(''); }} className="text-[10px] text-blue-500"> {t('monitor.filters.reset')} </button>}
                 </div>
             </div>
 
@@ -620,6 +668,14 @@ export const ProxyMonitor: React.FC<ProxyMonitorProps> = ({ className }) => {
                                                             'bg-gray-100 text-gray-700 dark:bg-gray-900/40 dark:text-gray-400'
                                                     }`}>
                                                     {selectedLog.protocol}
+                                                </span>
+                                            </div>
+                                        )}
+                                        {selectedLog.client_source && (
+                                            <div className="space-y-1.5">
+                                                <span className="block text-gray-500 dark:text-gray-400 uppercase font-black text-[10px] tracking-widest">{t('monitor.details.source', { defaultValue: 'Source' })}</span>
+                                                <span className={`inline-block px-2.5 py-1 rounded-md font-mono font-black text-xs text-white ${SOURCE_BADGE_STYLES[selectedLog.client_source] || SOURCE_BADGE_STYLES.unknown}`}>
+                                                    {SOURCE_LABELS[selectedLog.client_source] || selectedLog.client_source}
                                                 </span>
                                             </div>
                                         )}

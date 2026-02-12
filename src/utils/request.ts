@@ -74,6 +74,13 @@ const COMMAND_MAPPING: Record<string, { url: string; method: 'GET' | 'POST' | 'D
   'execute_opencode_clear': { url: '/api/proxy/opencode/clear', method: 'POST' },
   'get_opencode_config_content': { url: '/api/proxy/opencode/config', method: 'POST' },
 
+  // Cursor Sync
+  'get_cursor_sync_status': { url: '/api/proxy/cursor/status', method: 'POST' },
+  'execute_cursor_sync': { url: '/api/proxy/cursor/sync', method: 'POST' },
+  'execute_cursor_restore': { url: '/api/proxy/cursor/restore', method: 'POST' },
+  'get_cursor_config_content': { url: '/api/proxy/cursor/config', method: 'POST' },
+  'apply_cursor_model_preset': { url: '/api/proxy/cursor/preset/apply', method: 'POST' },
+
   // Stats
   'get_token_stats_hourly': { url: '/api/stats/token/hourly', method: 'GET' },
   'get_token_stats_daily': { url: '/api/stats/token/daily', method: 'GET' },

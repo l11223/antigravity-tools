@@ -515,6 +515,12 @@ impl AxumServer {
             .route("/proxy/droid/sync", post(admin_execute_droid_sync))
             .route("/proxy/droid/restore", post(admin_execute_droid_restore))
             .route("/proxy/droid/config", post(admin_get_droid_config_content))
+            .route("/proxy/cursor/status", post(admin_get_cursor_sync_status))
+            .route("/proxy/cursor/sync", post(admin_execute_cursor_sync))
+            .route("/proxy/cursor/restore", post(admin_execute_cursor_restore))
+            .route("/proxy/cursor/config", post(admin_get_cursor_config_content))
+            .route("/proxy/cursor/preset", get(admin_get_cursor_model_preset))
+            .route("/proxy/cursor/preset/apply", post(admin_apply_cursor_model_preset))
             .route("/proxy/status", get(admin_get_proxy_status))
             .route("/proxy/pool/config", get(admin_get_proxy_pool_config))
             .route("/proxy/pool/bindings", get(admin_get_all_account_bindings))
@@ -3494,4 +3500,114 @@ async fn admin_get_droid_config_content(
             StatusCode::INTERNAL_SERVER_ERROR,
             Json(ErrorResponse { error: e }),
         ))
+}
+
+// --- Cursor Sync Handlers ---
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct CursorSyncStatusRequest {
+    proxy_url: String,
+    api_key: String,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct CursorSyncRequest {
+    proxy_url: String,
+    api_key: String,
+}
+
+async fn admin_get_cursor_sync_status(
+    Json(payload): Json<CursorSyncStatusRequest>,
+) -> Result<impl IntoResponse, (StatusCode, Json<ErrorResponse>)> {
+    Ok(Json(crate::proxy::cursor_sync::get_sync_status(
+        &payload.proxy_url,
+        &payload.api_key,
+    )))
+}
+
+async fn admin_execute_cursor_sync(
+    Json(payload): Json<CursorSyncRequest>,
+) -> Result<impl IntoResponse, (StatusCode, Json<ErrorResponse>)> {
+    crate::proxy::cursor_sync::sync_config(&payload.proxy_url, &payload.api_key)
+        .map(|_| StatusCode::OK)
+        .map_err(|e| {
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(ErrorResponse { error: e }),
+            )
+        })
+}
+
+async fn admin_execute_cursor_restore(
+) -> Result<impl IntoResponse, (StatusCode, Json<ErrorResponse>)> {
+    crate::proxy::cursor_sync::restore_config()
+        .map(|_| StatusCode::OK)
+        .map_err(|e| {
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(ErrorResponse { error: e }),
+            )
+        })
+}
+
+async fn admin_get_cursor_config_content(
+) -> Result<impl IntoResponse, (StatusCode, Json<ErrorResponse>)> {
+    crate::proxy::cursor_sync::get_config_content()
+        .map(Json)
+        .map_err(|e| {
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(ErrorResponse { error: e }),
+            )
+        })
+}
+
+async fn admin_get_cursor_model_preset(
+) -> Result<impl IntoResponse, (StatusCode, Json<ErrorResponse>)> {
+    let preset = crate::proxy::cursor_sync::CursorModelPreset {
+        name: "Cursor Default".to_string(),
+        mappings: crate::proxy::cursor_sync::get_cursor_default_mapping(),
+    };
+    Ok(Json(preset))
+}
+
+async fn admin_apply_cursor_model_preset(
+    State(state): State<AppState>,
+) -> Result<impl IntoResponse, (StatusCode, Json<ErrorResponse>)> {
+    let cursor_mappings = crate::proxy::cursor_sync::get_cursor_default_mapping();
+
+    // 1. Merge cursor preset into current custom_mapping (in-memory hot update)
+    {
+        let mut mapping = state.custom_mapping.write().await;
+        for (k, v) in &cursor_mappings {
+            mapping.insert(k.clone(), v.clone());
+        }
+    }
+
+    // 2. Persist to disk
+    let mut app_config = crate::modules::config::load_app_config().map_err(|e| {
+        (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(ErrorResponse { error: e }),
+        )
+    })?;
+
+    for (k, v) in &cursor_mappings {
+        app_config.proxy.custom_mapping.insert(k.clone(), v.clone());
+    }
+
+    crate::modules::config::save_app_config(&app_config).map_err(|e| {
+        (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(ErrorResponse { error: e }),
+        )
+    })?;
+
+    logger::log_info("[API] Cursor 模型映射预设已应用并保存");
+    Ok(Json(serde_json::json!({
+        "applied": cursor_mappings.len(),
+        "mappings": cursor_mappings,
+    })))
 }

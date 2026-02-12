@@ -22,7 +22,8 @@ import {
     Check,
     X,
     Edit2,
-    Save
+    Save,
+    MousePointerClick
 } from 'lucide-react';
 import { AppConfig, ProxyConfig, StickySessionConfig, ExperimentalConfig } from '../types/config';
 import HelpTooltip from '../components/common/HelpTooltip';
@@ -32,6 +33,7 @@ import { cn } from '../utils/cn';
 import { useProxyModels } from '../hooks/useProxyModels';
 import GroupedSelect, { SelectOption } from '../components/common/GroupedSelect';
 import { CliSyncCard } from '../components/proxy/CliSyncCard';
+import CursorSyncCard from '../components/proxy/CursorSyncCard';
 import DebouncedSlider from '../components/common/DebouncedSlider';
 import { listAccounts } from '../services/accountService';
 import CircuitBreaker from '../components/settings/CircuitBreaker';
@@ -683,6 +685,40 @@ export default function ApiProxy() {
             setAppConfig({ ...appConfig, proxy: newConfig });
         } catch (error) {
             console.error('Failed to remove custom mapping:', error);
+        }
+    };
+
+    const [cursorPresetLoading, setCursorPresetLoading] = useState(false);
+
+    const handleImportCursorPreset = async () => {
+        if (!appConfig) return;
+        setCursorPresetLoading(true);
+        try {
+            const result = await invoke<{ applied: number; mappings: Record<string, string> }>('apply_cursor_model_preset');
+            // Merge the returned mappings into the current custom_mapping
+            const newConfig = {
+                ...appConfig.proxy,
+                custom_mapping: { ...appConfig.proxy.custom_mapping, ...result.mappings } as Record<string, string>
+            };
+            await invoke('update_model_mapping', { config: newConfig });
+            setAppConfig({ ...appConfig, proxy: newConfig });
+            showToast(
+                t('proxy.cursor_sync.preset_import_success', {
+                    count: result.applied,
+                    defaultValue: `Cursor preset imported: ${result.applied} mappings applied`
+                }),
+                'success'
+            );
+        } catch (error: any) {
+            showToast(
+                t('proxy.cursor_sync.preset_import_error', {
+                    error: error.toString(),
+                    defaultValue: `Import failed: ${error.toString()}`
+                }),
+                'error'
+            );
+        } finally {
+            setCursorPresetLoading(false);
         }
     };
 
@@ -1521,6 +1557,18 @@ print(response.text)`;
                                 />
                             </CollapsibleCard>
 
+                            {/* Cursor Editor Sync */}
+                            <CollapsibleCard
+                                title={t('proxy.cursor_sync.card_title', { defaultValue: 'Cursor Editor' })}
+                                icon={<MousePointerClick size={18} className="text-cyan-500" />}
+                                defaultExpanded={false}
+                            >
+                                <CursorSyncCard
+                                    proxyUrl={status.running ? status.base_url : `http://127.0.0.1:${appConfig.proxy.port || 8045}`}
+                                    apiKey={appConfig.proxy.api_key}
+                                />
+                            </CollapsibleCard>
+
                             {/* z.ai (GLM) Dispatcher */}
                             <CollapsibleCard
                                 title={t('proxy.config.zai.title')}
@@ -2315,6 +2363,23 @@ print(response.text)`;
                                             title={t('proxy.router.reset_mapping')}
                                         >
                                             <RefreshCw size={16} />
+                                        </button>
+
+                                        <div className="w-[1px] h-5 bg-gray-200 dark:bg-gray-700 mx-1"></div>
+
+                                        {/* Import Cursor Preset */}
+                                        <button
+                                            onClick={handleImportCursorPreset}
+                                            disabled={cursorPresetLoading}
+                                            className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 bg-cyan-600 hover:bg-cyan-700 text-white shadow-sm hover:shadow active:scale-95 h-9 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            title={t('proxy.cursor_sync.import_preset_title', { defaultValue: 'Import Cursor model mapping preset' })}
+                                        >
+                                            {cursorPresetLoading ? (
+                                                <RefreshCw size={14} className="animate-spin" />
+                                            ) : (
+                                                <MousePointerClick size={14} />
+                                            )}
+                                            {t('proxy.cursor_sync.import_preset_btn', { defaultValue: 'Cursor Preset' })}
                                         </button>
                                     </div>
                                 </div>
