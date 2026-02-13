@@ -301,3 +301,75 @@ export const CursorSyncCard = ({ proxyUrl, apiKey, className }: CursorSyncCardPr
                     </div>
                 </div>
             </div>
+
+            {/* Config Viewer Modal */}
+            {viewingConfig !== null && (
+                <div className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-white dark:bg-base-100 rounded-2xl shadow-2xl border border-gray-200 dark:border-base-300 w-full max-w-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+                        <div className="px-6 py-4 border-b border-gray-100 dark:border-base-200 flex items-center justify-between bg-gradient-to-r from-gray-50/80 to-cyan-50/30 dark:from-base-200/50 dark:to-cyan-950/20">
+                            <h3 className="font-bold text-gray-900 dark:text-base-content flex items-center gap-2.5">
+                                <div className="p-1.5 bg-cyan-500 rounded-lg">
+                                    <MousePointerClick size={14} className="text-white" />
+                                </div>
+                                {t('proxy.cursor_sync.modal.view_title', { defaultValue: 'Cursor 配置文件' })}
+                            </h3>
+                            <div className="flex items-center gap-1.5">
+                                <button
+                                    onClick={async () => {
+                                        const success = await copyToClipboard(viewingConfig);
+                                        if (success) {
+                                            showToast(t('proxy.cursor_sync.modal.copy_success', { defaultValue: '已复制' }), 'success');
+                                        }
+                                    }}
+                                    className="btn btn-ghost btn-sm gap-1.5 text-xs hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-900/20"
+                                >
+                                    <Copy size={14} />
+                                    {t('common.copy', { defaultValue: '复制' })}
+                                </button>
+                                <button
+                                    onClick={() => setViewingConfig(null)}
+                                    className="btn btn-ghost btn-sm btn-square hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20"
+                                >
+                                    <X size={16} />
+                                </button>
+                            </div>
+                        </div>
+                        <div className="p-5">
+                            <div className="bg-[#0d1117] rounded-xl p-5 overflow-auto max-h-[55vh] border border-gray-800/50 shadow-inner">
+                                <pre className="text-[12px] font-mono text-gray-300 leading-relaxed whitespace-pre-wrap break-all">
+                                    {viewingConfig}
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Restore Confirm Modal */}
+            <ModalDialog
+                isOpen={restoreConfirm}
+                title={status?.has_backup
+                    ? t('proxy.cursor_sync.btn_restore_backup', { defaultValue: '恢复备份' })
+                    : t('proxy.cursor_sync.btn_restore', { defaultValue: '恢复' })}
+                message={status?.has_backup
+                    ? t('proxy.cursor_sync.restore_backup_confirm', { defaultValue: '检测到备份文件，确定要恢复到同步前的配置吗？' })
+                    : t('proxy.cursor_sync.restore_confirm', { defaultValue: '确定要恢复 Cursor 的默认配置吗？' })}
+                onConfirm={executeRestore}
+                onCancel={() => setRestoreConfirm(false)}
+                isDestructive={true}
+            />
+
+            {/* Sync Confirm Modal */}
+            <ModalDialog
+                isOpen={syncConfirm}
+                title={t('proxy.cursor_sync.sync_confirm_title', { defaultValue: '同步确认' })}
+                message={t('proxy.cursor_sync.sync_confirm_message', { defaultValue: '即将同步 Cursor 编辑器配置。⚠️ 注意：此操作将覆盖您现有的 Cursor AI 代理设置。确定要继续吗？' })}
+                onConfirm={executeSync}
+                onCancel={() => setSyncConfirm(false)}
+                isDestructive={true}
+            />
+        </div>
+    );
+};
+
+export default CursorSyncCard;
