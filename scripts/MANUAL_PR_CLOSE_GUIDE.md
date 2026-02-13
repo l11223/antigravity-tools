@@ -20,9 +20,9 @@
 
 点击以下链接访问对应的 PR：
 
-- https://github.com/lbjlaq/Antigravity-Manager/pull/825
-- https://github.com/lbjlaq/Antigravity-Manager/pull/822
-- https://github.com/lbjlaq/Antigravity-Manager/pull/798
+- https://github.com/lbjlaq/NexusProxy-Manager/pull/825
+- https://github.com/lbjlaq/NexusProxy-Manager/pull/822
+- https://github.com/lbjlaq/NexusProxy-Manager/pull/798
 
 ### 2. 添加感谢评论
 
@@ -37,7 +37,7 @@
 - README.md 的版本更新日志
 - 贡献者列表
 
-再次感谢您对 Antigravity Tools 项目的支持！
+再次感谢您对 NexusProxy 项目的支持！
 
 ---
 
@@ -49,7 +49,7 @@ The updates are documented in:
 - README.md changelog
 - Contributors list
 
-Thank you again for your support of the Antigravity Tools project!
+Thank you again for your support of the NexusProxy project!
 ```
 
 ### 3. 关闭 PR
@@ -71,4 +71,4 @@ Thank you again for your support of the Antigravity Tools project!
 
 完成后，访问以下链接确认所有 PR 已关闭：
 
-https://github.com/lbjlaq/Antigravity-Manager/pulls?q=is%3Apr+is%3Aclosed
+https://github.com/lbjlaq/NexusProxy-Manager/pulls?q=is%3Apr+is%3Aclosed

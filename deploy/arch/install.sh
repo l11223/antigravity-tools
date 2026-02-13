@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-# Antigravity Tools - Arch Linux Self-Updating Installer
+# NexusProxy - Arch Linux Self-Updating Installer
 # This script fetches the latest release from GitHub and installs it using makepkg.
 
 echo "🚀 Fetching latest release information..."
-REPO="lbjlaq/Antigravity-Manager"
+REPO="lbjlaq/nexusproxy"
 LATEST_RELEASE=$(curl -s "https://api.github.com/repos/$REPO/releases/latest")
 PKGVER=$(echo "$LATEST_RELEASE" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
 

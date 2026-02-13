@@ -1002,7 +1002,7 @@ export default function ApiProxy() {
      api_key="${apiKey}"
  )
  
- # 注意: Antigravity 支持使用 Anthropic SDK 调用任意模型
+ # 注意: NexusProxy 支持使用 Anthropic SDK 调用任意模型
  response = client.messages.create(
      model="${modelId}",
      max_tokens=1024,
@@ -1018,7 +1018,7 @@ export default function ApiProxy() {
             return `# 需要安装: pip install google-generativeai
 import google.generativeai as genai
 
-# 使用 Antigravity 代理地址 (推荐 127.0.0.1)
+# 使用 NexusProxy 代理地址 (推荐 127.0.0.1)
 genai.configure(
     api_key="${apiKey}",
     transport='rest',

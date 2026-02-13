@@ -2,7 +2,7 @@
 
 ## 功能概述
 
-本 PR 为 Antigravity Manager 增加了 IP 安全监控功能，包括：
+本 PR 为 NexusProxy Manager 增加了 IP 安全监控功能，包括：
 
 1. **IP 黑名单**：支持按单个 IP 或 CIDR 范围封禁恶意访问者
 2. **IP 白名单**：支持白名单模式和白名单优先模式

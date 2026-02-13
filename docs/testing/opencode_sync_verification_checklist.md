@@ -23,7 +23,7 @@
 ### 2.1 Provider Creation
 - [ ] `provider.antigravity-manager` created with correct structure
 - [ ] `npm`: `@ai-sdk/anthropic`
-- [ ] `name`: `Antigravity Manager`
+- [ ] `name`: `NexusProxy Manager`
 - [ ] `options.baseURL`: ends with `/v1` (auto-normalized)
 - [ ] `options.apiKey`: matches proxy API key
 
@@ -169,6 +169,6 @@ ls -la ~/.config/opencode/*.bak
 
 - **OS**: 
 - **OpenCode Version**: 
-- **Antigravity Manager Version**: 
+- **NexusProxy Manager Version**: 
 - **Test Date**: 
 - **Tester**: 

@@ -85,9 +85,9 @@ function Settings() {
     // Dialog state
     const [isClearLogsOpen, setIsClearLogsOpen] = useState(false);
     const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
-    const [dataDirPath, setDataDirPath] = useState<string>('~/.antigravity_tools/');
+    const [dataDirPath, setDataDirPath] = useState<string>('~/.nexusproxy_tools/');
 
-    // Antigravity cache clearing state
+    // NexusProxy cache clearing state
     const [isClearCacheOpen, setIsClearCacheOpen] = useState(false);
     const [cachePaths, setCachePaths] = useState<string[]>([]);
     const [isClearingCache, setIsClearingCache] = useState(false);
@@ -209,12 +209,12 @@ function Settings() {
         }
     };
 
-    const handleSelectAntigravityPath = async () => {
+    const handleSelectNexusProxyPath = async () => {
         try {
             const selected = await open({
                 directory: false,
                 multiple: false,
-                title: t('settings.advanced.antigravity_path_select'),
+                title: t('settings.advanced.nexusproxy_path_select'),
             });
             if (selected && typeof selected === 'string') {
                 setFormData({ ...formData, antigravity_executable: selected });
@@ -248,12 +248,12 @@ function Settings() {
         }
     };
 
-    const handleDetectAntigravityPath = async () => {
+    const handleDetectNexusProxyPath = async () => {
         try {
-            const command = isTauri() ? 'get_antigravity_path' : 'get_antigravity_path'; // 后端已统一
+            const command = isTauri() ? 'get_nexusproxy_path' : 'get_nexusproxy_path'; // 后端已统一
             const path = await invoke<string>(command, { bypassConfig: true });
             setFormData({ ...formData, antigravity_executable: path });
-            showToast(t('settings.advanced.antigravity_path_detected'), 'success');
+            showToast(t('settings.advanced.nexusproxy_path_detected'), 'success');
         } catch (error) {
             showToast(`${t('common.error')}: ${error}`, 'error');
         }
@@ -321,8 +321,8 @@ function Settings() {
         }
     };
 
-    // Handle clearing Antigravity cache
-    const confirmClearAntigravityCache = async () => {
+    // Handle clearing NexusProxy cache
+    const confirmClearNexusProxyCache = async () => {
         setIsClearingCache(true);
         try {
             const result = await invoke<{
@@ -839,14 +839,14 @@ function Settings() {
                                 {/* 反重力程序路径 */}
                                 <div>
                                     <label className="block text-sm font-medium text-gray-900 dark:text-base-content mb-1">
-                                        {t('settings.advanced.antigravity_path')}
+                                        {t('settings.advanced.nexusproxy_path')}
                                     </label>
                                     <div className="flex gap-2">
                                         <input
                                             type="text"
                                             className="flex-1 px-4 py-4 border border-gray-200 dark:border-base-300 rounded-lg bg-gray-50 dark:bg-base-200 text-gray-900 dark:text-base-content font-medium"
                                             value={formData.antigravity_executable || ''}
-                                            placeholder={t('settings.advanced.antigravity_path_placeholder')}
+                                            placeholder={t('settings.advanced.nexusproxy_path_placeholder')}
                                             onChange={(e) => setFormData({ ...formData, antigravity_executable: e.target.value })}
                                         />
                                         {formData.antigravity_executable && (
@@ -859,14 +859,14 @@ function Settings() {
                                         )}
                                         <button
                                             className="px-4 py-2 border border-gray-200 dark:border-base-300 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-base-200 transition-colors"
-                                            onClick={handleDetectAntigravityPath}
+                                            onClick={handleDetectNexusProxyPath}
                                         >
                                             {t('settings.advanced.detect_btn')}
                                         </button>
                                         {isTauri() ? (
                                             <button
                                                 className="px-4 py-2 border border-gray-200 dark:border-base-300 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-base-200 transition-colors"
-                                                onClick={handleSelectAntigravityPath}
+                                                onClick={handleSelectNexusProxyPath}
                                             >
                                                 {t('settings.advanced.select_btn')}
                                             </button>
@@ -877,7 +877,7 @@ function Settings() {
                                         )}
                                     </div>
                                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                                        {t('settings.advanced.antigravity_path_desc')}
+                                        {t('settings.advanced.nexusproxy_path_desc')}
                                     </p>
                                 </div>
 
@@ -933,7 +933,7 @@ function Settings() {
                                     </div>
                                 </div>
 
-                                {/* Antigravity 缓存清理 */}
+                                {/* NexusProxy 缓存清理 */}
                                 <div className="border-t border-gray-200 dark:border-base-200 pt-4">
                                     <h3 className="font-medium text-gray-900 dark:text-base-content mb-3">{t('settings.advanced.antigravity_cache_title')}</h3>
                                     <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700/30 rounded-lg p-3 mb-3">
@@ -1203,13 +1203,13 @@ function Settings() {
                                         <div className="absolute inset-0 bg-blue-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                                         <img
                                             src="/icon.png"
-                                            alt="Antigravity Logo"
+                                            alt="NexusProxy Logo"
                                             className="relative w-24 h-24 rounded-3xl shadow-2xl transform group-hover:scale-105 transition-all duration-500 rotate-3 group-hover:rotate-6 object-cover bg-white dark:bg-black"
                                         />
                                     </div>
 
                                     <div>
-                                        <h3 className="text-3xl font-black text-gray-900 dark:text-base-content tracking-tight mb-2">{t('common.app_name', 'Antigravity Tools')}</h3>
+                                        <h3 className="text-3xl font-black text-gray-900 dark:text-base-content tracking-tight mb-2">{t('common.app_name', 'NexusProxy')}</h3>
                                         <div className="flex items-center justify-center gap-2 text-sm">
                                             v4.1.15
                                             <span className="text-gray-400 dark:text-gray-600">•</span>
@@ -1244,7 +1244,7 @@ function Settings() {
 
                                     {/* GitHub Card */}
                                     <a
-                                        href="https://github.com/lbjlaq/Antigravity-Manager"
+                                        href="https://github.com/l11223/nexusproxy-tools"
                                         target="_blank"
                                         rel="noreferrer"
                                         className="bg-white dark:bg-base-100 p-4 rounded-2xl border border-gray-100 dark:border-base-300 shadow-sm hover:shadow-md hover:border-gray-300 dark:hover:border-gray-600 transition-all group flex flex-col items-center text-center gap-3 cursor-pointer"
@@ -1366,7 +1366,7 @@ function Settings() {
                     onCancel={() => setIsClearLogsOpen(false)}
                 />
 
-                {/* Antigravity Cache Clear Modal */}
+                {/* NexusProxy Cache Clear Modal */}
                 <ModalDialog
                     isOpen={isClearCacheOpen}
                     title={t('settings.advanced.clear_cache_confirm_title')}
@@ -1374,7 +1374,7 @@ function Settings() {
                     confirmText={isClearingCache ? t('common.clearing') : t('common.clear')}
                     cancelText={t('common.cancel')}
                     isDestructive={true}
-                    onConfirm={confirmClearAntigravityCache}
+                    onConfirm={confirmClearNexusProxyCache}
                     onCancel={() => setIsClearCacheOpen(false)}
                 >
                     <div className="space-y-3">
@@ -1420,11 +1420,11 @@ function Settings() {
                         </p>
                         <div className="bg-gray-50 dark:bg-base-200 rounded-lg p-3">
                             <div className="flex items-center justify-between gap-2">
-                                <code className="text-xs text-gray-700 dark:text-gray-300 break-all">brew upgrade --cask antigravity-tools</code>
+                                <code className="text-xs text-gray-700 dark:text-gray-300 break-all">brew upgrade --cask nexusproxy-tools</code>
                                 <button
                                     className="shrink-0 px-2 py-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 border border-gray-200 dark:border-base-300 rounded hover:bg-gray-100 dark:hover:bg-base-300 transition-colors"
                                     onClick={() => {
-                                        navigator.clipboard.writeText('brew upgrade --cask antigravity-tools');
+                                        navigator.clipboard.writeText('brew upgrade --cask nexusproxy-tools');
                                         showToast(t('common.copied', 'Copied'), 'success');
                                     }}
                                 >
@@ -1435,11 +1435,11 @@ function Settings() {
                         <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700/30 rounded-lg p-3">
                             <p className="text-xs text-amber-700 dark:text-amber-400 mb-2">{t('settings.about.brew_quarantine_hint')}</p>
                             <div className="flex items-center justify-between gap-2">
-                                <code className="text-xs text-amber-800 dark:text-amber-300 break-all">sudo xattr -rd com.apple.quarantine "/Applications/Antigravity Tools.app"</code>
+                                <code className="text-xs text-amber-800 dark:text-amber-300 break-all">sudo xattr -rd com.apple.quarantine "/Applications/NexusProxy.app"</code>
                                 <button
                                     className="shrink-0 px-2 py-1 text-xs text-amber-600 hover:text-amber-800 dark:text-amber-400 dark:hover:text-amber-200 border border-amber-200 dark:border-amber-700 rounded hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors"
                                     onClick={() => {
-                                        navigator.clipboard.writeText('sudo xattr -rd com.apple.quarantine "/Applications/Antigravity Tools.app"');
+                                        navigator.clipboard.writeText('sudo xattr -rd com.apple.quarantine "/Applications/NexusProxy.app"');
                                         showToast(t('common.copied', 'Copied'), 'success');
                                     }}
                                 >
@@ -1487,7 +1487,7 @@ function Settings() {
                             {/* GitHub & Community Links */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-8">
                                 <a
-                                    href="https://github.com/l11223/antigravity-tools"
+                                    href="https://github.com/l11223/nexusproxy-tools"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-gray-50 dark:bg-base-200 border border-gray-100 dark:border-base-300 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-md transition-all cursor-pointer group"
@@ -1497,7 +1497,7 @@ function Settings() {
                                     <span className="text-xs text-gray-400">给个 Star 就是最大的支持</span>
                                 </a>
                                 <a
-                                    href="https://github.com/l11223/antigravity-tools/issues"
+                                    href="https://github.com/l11223/nexusproxy-tools/issues"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-gray-50 dark:bg-base-200 border border-gray-100 dark:border-base-300 hover:border-green-300 dark:hover:border-green-600 hover:shadow-md transition-all cursor-pointer group"

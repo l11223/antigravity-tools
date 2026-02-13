@@ -3,7 +3,7 @@
 # 关闭已集成到 v4.0.3 的 PR 脚本
 # 使用前请确保已安装并登录 GitHub CLI: brew install gh && gh auth login
 
-REPO="lbjlaq/Antigravity-Manager"
+REPO="l11223/nexusproxy-tools"
 VERSION="v4.0.3"
 
 # 感谢消息模板
@@ -15,7 +15,7 @@ THANK_YOU_MESSAGE="感谢您的贡献！🎉
 - README.md 的版本更新日志
 - 贡献者列表
 
-再次感谢您对 Antigravity Tools 项目的支持！
+再次感谢您对 NexusProxy 项目的支持！
 
 ---
 
@@ -27,7 +27,7 @@ The updates are documented in:
 - README.md changelog
 - Contributors list
 
-Thank you again for your support of the Antigravity Tools project!"
+Thank you again for your support of the NexusProxy project!"
 
 echo "================================================"
 echo "关闭已集成到 ${VERSION} 的 PR"

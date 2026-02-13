@@ -341,4 +341,4 @@ tail -100 ~/Library/Application\ Support/com.antigravity.tools/logs/antigravity.
 ## 联系方式
 
 如有问题，请在 GitHub 提 Issue：
-https://github.com/lbjlaq/Antigravity-Manager/issues
+https://github.com/lbjlaq/antigravity-tools/issues

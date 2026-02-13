@@ -1,14 +1,14 @@
-# Antigravity Tools 🚀
+# NexusProxy 🚀
 > Professional AI Account Management & Protocol Proxy System (v4.1.15)
 
 <div align="center">
-  <img src="public/icon.png" alt="Antigravity Logo" width="120" height="120" style="border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+  <img src="public/icon.png" alt="NexusProxy Logo" width="120" height="120" style="border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
 
   <h3>Your Personal High-Performance AI Dispatch Gateway</h3>
   <p>Seamlessly proxy Gemini & Claude. OpenAI-Compatible. Privacy First.</p>
   
   <p>
-    <a href="https://github.com/lbjlaq/Antigravity-Manager">
+    <a href="https://github.com/lbjlaq/antigravity-tools">
       <img src="https://img.shields.io/badge/Version-4.1.15-blue?style=flat-square" alt="Version">
     </a>
     <img src="https://img.shields.io/badge/Tauri-v2-orange?style=flat-square" alt="Tauri">
@@ -33,7 +33,7 @@
 
 ---
 
-**Antigravity Tools** is an all-in-one desktop application designed for developers and AI enthusiasts. It perfectly combines multi-account management, protocol conversion, and smart request scheduling to provide you with a stable, high-speed, and low-cost **Local AI Relay Station**.
+**NexusProxy** is an all-in-one desktop application designed for developers and AI enthusiasts. It perfectly combines multi-account management, protocol conversion, and smart request scheduling to provide you with a stable, high-speed, and low-cost **Local AI Relay Station**.
 
 By leveraging this app, you can transform common Web Sessions (Google/Anthropic) into standardized API interfaces, completely eliminating the protocol gap between different providers.
 
@@ -42,7 +42,7 @@ By leveraging this app, you can transform common Web Sessions (Google/Anthropic)
 | Sponsor | Description |
 | :---: | :--- |
 | <img src="docs/images/packycode_logo.png" width="200" alt="PackyCode Logo"> | Thanks to **PackyCode** for sponsoring this project! PackyCode is a reliable and efficient API relay service provider, offering relays for various services such as Claude Code, Codex, and Gemini. PackyCode provides a special offer for users of this project: Register using [this link](https://www.packyapi.com/register?aff=Ctrler) and enter the **"Ctrler"** coupon code when topping up to enjoy a **10% discount**. |
-| <img src="docs/images/AICodeMirror.jpg" width="200" alt="AICodeMirror Logo"> | Thanks to **AICodeMirror** for sponsoring this project! AICodeMirror provides official high-stability relay services for Claude Code / Codex / Gemini CLI, supporting enterprise-grade concurrency, fast invoicing, and 24/7 dedicated technical support. Claude Code / Codex / Gemini official channels at 38% / 2% / 9% of original price, with extra discounts on top-ups! AICodeMirror offers special benefits for Antigravity-Manager users: register via [this link](https://www.aicodemirror.com/register?invitecode=MV5XUM) to enjoy 20% off your first top-up, and enterprise customers can get up to 25% off! |
+| <img src="docs/images/AICodeMirror.jpg" width="200" alt="AICodeMirror Logo"> | Thanks to **AICodeMirror** for sponsoring this project! AICodeMirror provides official high-stability relay services for Claude Code / Codex / Gemini CLI, supporting enterprise-grade concurrency, fast invoicing, and 24/7 dedicated technical support. Claude Code / Codex / Gemini official channels at 38% / 2% / 9% of original price, with extra discounts on top-ups! AICodeMirror offers special benefits for antigravity-tools users: register via [this link](https://www.aicodemirror.com/register?invitecode=MV5XUM) to enjoy 20% off your first top-up, and enterprise customers can get up to 25% off! |
 
 ### ⭐ Star History
 
@@ -84,7 +84,7 @@ If you find this project useful, a Star is the best support!
 | | |
 | :---: | :---: |
 | ![Dashboard - Global Quota Monitoring & One-click Switch](docs/images/dashboard-light.png) <br> Dashboard | ![Account List - High-density Quota Display & Smart 403 Labeling](docs/images/accounts-light.png) <br> Account List |
-| ![About Page - About Antigravity Tools](docs/images/about-dark.png) <br> About Page | ![API Proxy - Service Control](docs/images/v3/proxy-settings.png) <br> API Proxy |
+| ![About Page - About NexusProxy](docs/images/about-dark.png) <br> About Page | ![API Proxy - Service Control](docs/images/v3/proxy-settings.png) <br> API Proxy |
 | ![Settings - General Config](docs/images/settings-dark.png) <br> Settings | |
 
 ### 💡 Usage Examples
@@ -98,7 +98,7 @@ If you find this project useful, a Star is the best support!
 
 ```mermaid
 graph TD
-    Client([External Apps: Claude Code/NextChat]) -->|OpenAI/Anthropic| Gateway[Antigravity Axum Server]
+    Client([External Apps: Claude Code/NextChat]) -->|OpenAI/Anthropic| Gateway[NexusProxy Axum Server]
     Gateway --> Middleware[Middleware: Auth/Rate Limit/Logs]
     Middleware --> Router[Model Router: ID Mapping]
     Router --> Dispatcher[Dispatcher: Rotation/Weights]
@@ -117,7 +117,7 @@ If you have [Homebrew](https://brew.sh/) installed, run:
 
 ```bash
 # 1. Tap the repository
-brew tap lbjlaq/antigravity-manager https://github.com/lbjlaq/Antigravity-Manager
+brew tap lbjlaq/antigravity-manager https://github.com/lbjlaq/antigravity-tools
 
 # 2. Install the app
 brew install --cask antigravity-tools
@@ -129,19 +129,19 @@ You can choose to install via the one-click script or Homebrew:
 
 **Option 1: One-click script (Recommended)**
 ```bash
-curl -sSL https://raw.githubusercontent.com/lbjlaq/Antigravity-Manager/main/deploy/arch/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/lbjlaq/antigravity-tools/main/deploy/arch/install.sh | bash
 ```
 
 **Option 2: via Homebrew** (If you have [Linuxbrew](https://sh.brew.sh/) installed)
 ```bash
-brew tap lbjlaq/antigravity-manager https://github.com/lbjlaq/Antigravity-Manager/releases/download/v4.1.15/Antigravity_Tools_4.1.15_x64.dmg
+brew tap lbjlaq/antigravity-manager https://github.com/lbjlaq/antigravity-tools/releases/download/v4.1.15/NexusProxy_Tools_4.1.15_x64.dmg
 ```
 
 #### Other Linux Distributions
 The AppImage will be automatically symlinked to your binary path with executable permissions.
 
 ### Option B: Manual Download
-Download from [GitHub Releases](https://github.com/lbjlaq/Antigravity-Manager/releases):
+Download from [GitHub Releases](https://github.com/lbjlaq/antigravity-tools/releases):
 *   **macOS**: `.dmg` (Universal, Apple Silicon & Intel)
 *   **Windows**: `.msi` or portable `.zip`
 *   **Linux**: `.deb` or `AppImage`
@@ -202,7 +202,7 @@ docker compose up -d
 #### macOS says "App is damaged"?
 Due to macOS security gatekeeper, non-App Store apps might show this. Run this in Terminal to fix:
 ```bash
-sudo xattr -rd com.apple.quarantine "/Applications/Antigravity Tools.app"
+sudo xattr -rd com.apple.quarantine "/Applications/NexusProxy.app"
 ```
 
 ## 🔌 Quick Integration Examples
@@ -216,7 +216,7 @@ sudo xattr -rd com.apple.quarantine "/Applications/Antigravity Tools.app"
 > Note: the auth URL contains a one-time local callback port. Always use the latest URL shown in the dialog. If the app isn’t running or the dialog is closed during auth, the browser may show `localhost refused connection`.
 
 ### How to use with Claude Code CLI?
-1. Start Antigravity service in the "API Proxy" tab.
+1. Start NexusProxy service in the "API Proxy" tab.
 2. In your terminal:
 ```bash
 export ANTHROPIC_API_KEY="sk-antigravity"
@@ -270,7 +270,7 @@ print(response.choices[0].message.content)
             -   **Self-Correction**: Detecting an empty `project_id` now triggers an automatic re-fetch process, effectively resolving the "Invalid project resource name projects/" error mentioned in Issue #1846 and #1851.
         -   **[Troubleshooting] Resolving HTTP 404 "Resource projects/... not found" Errors (Issue #1858)**:
             -   **Verify Project ID**: Log in to the [Google Cloud Console](https://console.cloud.google.com/) and search for the specific Project ID (e.g., `bold-spark-xxx`) mentioned in the error. If the project is missing, create a new one and enable the necessary Vertex AI APIs.
-            -   **Reset Account Session**: Try removing and re-adding your account within the Antigravity app to clear any stale session data.
+            -   **Reset Account Session**: Try removing and re-adding your account within the NexusProxy app to clear any stale session data.
             -   **CLI-Based Verification**: We recommend re-authenticating via the Gemini CLI (`gcloud auth login`) and ensuring that your project is correctly configured using `gcloud config set project`.
         -   **[Troubleshooting] Resolving HTTP 403 "Forbidden" Errors (Issue #1834)**:
             -   **Check Verification Link**: Look for a message in the API response like "To continue, verify your account at...". If present, follow the link to complete Google's verification process.
@@ -321,7 +321,7 @@ print(response.choices[0].message.content)
     *   **v4.1.12 (2026-02-10)**:
         -   **[Core Feature] OpenCode CLI Deep Integration (PR #1739)**:
             -   **Auto Detection**: Added automatic detection and configuration sync support for OpenCode CLI environment variables.
-            -   **One-Click Sync**: Supports seamless injection of Antigravity configurations into the OpenCode CLI environment via the "External Providers" card.
+            -   **One-Click Sync**: Supports seamless injection of NexusProxy configurations into the OpenCode CLI environment via the "External Providers" card.
         -   **[Core Fix] Claude Opus Thinking Budget Injection (PR #1747)**:
             -   **Budget Correction**: Fixed an issue where the default Thinking Budget was not correctly injected when Opus models automatically enabled thinking mode, preventing upstream errors due to missing budget.
         -   **[Core Optimization] Claude Opus 4.6 Thinking Upgrade (Issue #1741, #1742, #1743)**:
@@ -416,7 +416,7 @@ print(response.choices[0].message.content)
             -   **Precision Upgrade**: Upgraded `temperature` and `top_p` data types from `f32` to `f64` in the backend.
             -   **Accuracy Calibration**: Completely eliminated minor deviations (e.g., `0.95` becoming `0.949999...`) during proxy serialization, improving upstream compatibility.
         -   **[Core Refactoring] Implement App Name Internationalization (PR #1662)**:
-            -   **UI Upgrade**: Removed hardcoded "Antigravity Tools" from `NavLogo` and `Settings` pages, utilizing the `app_name` translation key for consistent UI language switching.
+            -   **UI Upgrade**: Removed hardcoded "NexusProxy" from `NavLogo` and `Settings` pages, utilizing the `app_name` translation key for consistent UI language switching.
         -   **[Core Fix] Correct Misidentification of gemini-3-pro-image as a Thinking Model (Issue #1675)**:
             -   **Root Cause**: `gemini-3-pro-image` and its 4k/2k variants were incorrectly identified as "Thinking Models" because they contain the `gemini-3-pro` keyword.
             -   **Conflict Resolved**: Fixed the conflict caused by the incorrect injection of `thinkingConfig` alongside `imageConfig`, which led to backend resolution downgrades (to 1k).
@@ -427,7 +427,7 @@ print(response.choices[0].message.content)
             -   **Structured Results**: Introduced `UpstreamCallResult` to unify upstream request management and optimize streaming/non-streaming response paths.
     *   **v4.1.8 (2026-02-07)**:
         -   **[Core Feature] Integrated Claude Opus 4.6 Thinking Model Support (PR #1641)**:
-            -   **Hybrid Architecture**: Implemented a "Static Config + Dynamic Fetch" dual-mode architecture. Model lists are dynamically fetched via Antigravity API, while advanced metadata like Thinking Mode is supplemented by the local registry, perfectly balancing flexibility and stability.
+            -   **Hybrid Architecture**: Implemented a "Static Config + Dynamic Fetch" dual-mode architecture. Model lists are dynamically fetched via NexusProxy API, while advanced metadata like Thinking Mode is supplemented by the local registry, perfectly balancing flexibility and stability.
             -   **Zero-Config Access**: `claude-opus-4-6` series models automatically enable Thinking Mode with preset Budgets, allowing users to enjoy the latest reasoning capabilities without manual intervention.
             -   **Cutting-edge Mapping**: Added support for `claude-opus-4-6-thinking` and its aliases (`claude-opus-4-6`, `20260201`), managing them under the `claude-sonnet-4.5` quota group.
         -   **[Core Optimization] Improve OpenCode CLI Detection Logic (PR #1649)**:
@@ -487,7 +487,7 @@ print(response.choices[0].message.content)
             -   **Error Code Optimization**: Optimized error mapping for image generation services, ensuring 429/503 statuses correctly trigger client-side retries.
         -   **[Core Enhancement] Custom Mapping Supports Manual Input for Any Model ID**:
             -   **Flexible Input**: Added manual input functionality to the custom mapping target model selector. Users can now directly enter any model ID at the bottom of the dropdown menu.
-            -   **Unreleased Model Experience**: Supports experiencing models not yet officially released by Antigravity, such as `claude-opus-4-6`. Users can route requests to these experimental models through custom mappings.
+            -   **Unreleased Model Experience**: Supports experiencing models not yet officially released by NexusProxy, such as `claude-opus-4-6`. Users can route requests to these experimental models through custom mappings.
             -   **Important Notice**: Not all accounts support calling unreleased models. If your account lacks access to a specific model, requests may return errors. It is recommended to test with a small number of requests first to confirm account permissions before large-scale use.
             -   **Quick Operation**: Supports Enter key for quick submission of custom model IDs, improving input efficiency.
     *   **v4.1.6 (2026-02-06)**:
@@ -602,8 +602,8 @@ print(response.choices[0].message.content)
             -   **Proxy Support**: The update checker now fully respects the global upstream proxy configuration.
             -   **Multi-layer Fallback**: Implemented a 3-layer fallback strategy: `GitHub API -> GitHub Raw -> jsDelivr`, significantly improving update detection reliability.
             -   **Observability**: The update notification now displays the source of the detection.
-        -   **[Core Optimization] Antigravity Database Compatibility Improvement (>= 1.16.5)**:
-            -   **Smart Version Detection**: Added a cross-platform version detection module (macOS/Windows/Linux) to automatically identify the Antigravity client version.
+        -   **[Core Optimization] NexusProxy Database Compatibility Improvement (>= 1.16.5)**:
+            -   **Smart Version Detection**: Added a cross-platform version detection module (macOS/Windows/Linux) to automatically identify the NexusProxy client version.
             -   **Format Adaptation**: Supported the new `antigravityUnifiedStateSync.oauthToken` format for v1.16.5+ while maintaining backward compatibility for legacy formats.
             -   **Smart Injection**: Implemented a version-aware injection strategy with a dual-format fallback mechanism to ensure seamless account switching.
         -   **[Core Fix] Resolve react-router SSR XSS Vulnerability (CVE-2026-21884) (PR #1500)**:
@@ -1470,7 +1470,7 @@ print(response.choices[0].message.content)
                 - **Model Awareness**: Processor automatically identifies physical context boundaries for 1M (Flash) and 2M (Pro).
                 - **400 Error Interception**: Even if physical overflow occurs, the proxy intercepts `Prompt is too long` errors and returns friendly guidance, directing users to execute `/compact`.
             - **Impact**: Completely resolved the issue where Claude Code refused to compress due to hidden token usage, ultimately leading to Gemini server errors in long conversation scenarios.
-        - **Playwright MCP Stability & Connectivity Enhancement (Inspired by [Antigravity2Api](https://github.com/znlsl/Antigravity2Api)) - Resolve Issue #616**:
+        - **Playwright MCP Stability & Connectivity Enhancement (Inspired by [NexusProxy2Api](https://github.com/znlsl/NexusProxy2Api)) - Resolve Issue #616**:
             - **SSE Keep-Alive**: Introduced 15s heartbeats (`: ping`) to prevent connection timeouts during long-running tool calls.
             - **MCP XML Bridge**: Bidirectional protocol conversion (instruction injection + label interception), significantly improving reliability for MCP tools (like Playwright).
             - **Aggressive Context Slimming**:
@@ -1539,7 +1539,7 @@ print(response.choices[0].message.content)
             - **Deep cache_control Cleanup**: Implemented multi-layer `cache_control` field cleanup mechanism, completely resolving "Extra inputs are not permitted" errors caused by `cache_control` in thinking blocks when using tools like Chrome Dev Tools MCP.
                 - **Enhanced Log Tracking**: Added `[DEBUG-593]` log prefix, recording message and block indices for easy problem localization and debugging.
                 - **Recursive Deep Cleanup**: Added `deep_clean_cache_control()` function to recursively traverse all nested objects and arrays, removing `cache_control` fields from any location.
-                - **Final Safety Net**: Performs deep cleanup again after building Gemini request body and before sending, ensuring no `cache_control` fields are sent to Antigravity.
+                - **Final Safety Net**: Performs deep cleanup again after building Gemini request body and before sending, ensuring no `cache_control` fields are sent to NexusProxy.
             - **Smart Tool Output Compression**: Added `tool_result_compressor` module to handle oversized tool outputs, reducing 429 error probability caused by excessive prompt length.
                 - **Browser Snapshot Compression**: Automatically detects and compresses browser snapshots exceeding 20,000 characters, using head (70%) + tail (30%) retention strategy with middle omission.
                 - **Large File Notice Compression**: Intelligently identifies "exceeds maximum allowed tokens" pattern, extracts key information (file path, character count, format description), significantly reducing redundant content.
@@ -1554,7 +1554,7 @@ print(response.choices[0].message.content)
             - **Impact**: This fix ensures all API endpoints involving account calls correctly display account information in the monitoring panel instead of showing "-", improving the completeness and usability of the API monitoring system.
         - **Headless Server Deployment Support**:
             - **One-click Deployment Scripts**: Added `deploy/headless-xvfb/` directory, providing installation, sync, and upgrade scripts for headless Linux servers.
-            - **Xvfb Environment Adaptation**: Enables the GUI version of Antigravity Tools to run on remote servers without display hardware via virtual display technology, complete with resource consumption warnings and limitation documentation.
+            - **Xvfb Environment Adaptation**: Enables the GUI version of NexusProxy to run on remote servers without display hardware via virtual display technology, complete with resource consumption warnings and limitation documentation.
     *   **v3.3.25 (2026-01-13)**:
         - **Session-Based Signature Caching System - Improved Thinking Model Stability (Core Thanks to @Gok-tug PR #574)**:
             - **Three-Layer Signature Cache Architecture**: Implemented a complete three-layer caching system for Tool Signatures (Layer 1), Thinking Families (Layer 2), and Session Signatures (Layer 3).
@@ -1607,7 +1607,7 @@ print(response.choices[0].message.content)
             - **Resource Balancing**: Prevents long-quota accounts from being idle while short-quota accounts are exhausted prematurely due to random assignment.
         - **Non-Streaming Base64 Signature Fix (Core Thanks to @ThanhNguyxn PR #568)**:
             - **Full Mode Compatibility**: Applied the Base64 thinking signature decoding logic from streaming responses to non-streaming responses.
-            - **Eliminated Signature Errors**: Completely resolved 400 errors caused by inconsistent signature encoding formats when using Antigravity proxy with non-streaming clients (e.g., Python SDK).
+            - **Eliminated Signature Errors**: Completely resolved 400 errors caused by inconsistent signature encoding formats when using NexusProxy proxy with non-streaming clients (e.g., Python SDK).
         - **Internationalization (i18n)**:
             - **Japanese Support**: Added Japanese localization support (Thank you @Koshikai PR #526).
             - **Turkish Support**: Added Turkish localization support (Thank you @hakanyalitekin PR #515).
@@ -1724,11 +1724,11 @@ print(response.choices[0].message.content)
             - **Impact**: This fix significantly improves stability and availability in multi-account environments, ensuring all accounts are fully utilized and avoiding account rotation failures caused by rate-limit time parsing errors.
     *   **v3.3.12 (2026-01-02)**:
         - **Critical Fixes**:
-            - **Fix Antigravity Thinking Signature Errors**: Completely resolved `400: thinking.signature: Field required` errors when using the Antigravity (Google API) channel.
+            - **Fix NexusProxy Thinking Signature Errors**: Completely resolved `400: thinking.signature: Field required` errors when using the NexusProxy (Google API) channel.
                 - **Disabled Dummy Thinking Block Injection**: Removed logic that auto-injected unsigned "Thinking..." placeholder blocks for historical messages. Google API rejects any thinking blocks without valid signatures.
                 - **Removed Fake Signature Fallback**: Removed logic that added `skip_thought_signature_validator` sentinel values to ToolUse and Thinking blocks. Now only uses real signatures or omits the thoughtSignature field entirely.
                 - **Fixed Background Task Misclassification**: Removed the "Caveat: The messages below were generated" keyword to prevent normal requests containing Claude Desktop system prompts from being misclassified as background tasks and downgraded to Flash Lite models.
-                - **Impact**: This fix ensures stability for Claude CLI, Cursor, Cherry Studio, and other clients when using the Antigravity proxy, especially in multi-turn conversations and tool calling scenarios.
+                - **Impact**: This fix ensures stability for Claude CLI, Cursor, Cherry Studio, and other clients when using the NexusProxy proxy, especially in multi-turn conversations and tool calling scenarios.
     *   **v3.3.11 (2026-01-02)**:
         - **Critical Fixes**:
             - **Cherry Studio Compatibility Fix (Gemini 3)**:
@@ -1745,7 +1745,7 @@ print(response.choices[0].message.content)
         - **Critical Fix**:
             - **Fixed Gemini 3 Python Client Crash**: Removed the logic that forced `maxOutputTokens: 64000` for Gemini requests. This override caused standard Gemini 3 Flash/Pro models (limit 8192) to reject requests with empty responses, leading to `'NoneType' object has no attribute 'strip'` errors in Python clients. The proxy now defaults to model native limits or respects client parameters.
         - **Scoop Installation Compatibility Support (Core Thanks to @Small-Ku PR #252)**:
-            - **Startup Arguments Configuration**: Added Antigravity startup arguments configuration feature. Users can now customize startup parameters in the Settings page, perfectly compatible with portable installations via package managers like Scoop.
+            - **Startup Arguments Configuration**: Added NexusProxy startup arguments configuration feature. Users can now customize startup parameters in the Settings page, perfectly compatible with portable installations via package managers like Scoop.
             - **Smart Database Path Detection**: Optimized database path detection logic with priority-based checking:
                 - Command-line specified `--user-data-dir` path
                 - Portable mode `data/user-data` directory
@@ -1914,7 +1914,7 @@ print(response.choices[0].message.content)
             - **Full Vision Capability Enrichment**: The OpenAI protocol now supports automatic parsing of Base64 images and mapping them to upstream `inlineData`, providing the same image processing power as the Claude protocol.
     *   **v3.2.7 (2025-12-26)**:
         - **New Features**:
-            - **Launch at Startup**: Added auto-launch feature that allows users to enable/disable automatic startup of Antigravity Tools when the system boots, configurable from the "General" tab in Settings.
+            - **Launch at Startup**: Added auto-launch feature that allows users to enable/disable automatic startup of NexusProxy when the system boots, configurable from the "General" tab in Settings.
             - **Account List Page Size Selector**: Added a page size selector in the pagination bar of the Accounts page, allowing users to directly choose items per page (10/20/50/100) without entering Settings, improving batch operation efficiency.
         - **Bug Fixes**:
             - **Comprehensive JSON Schema Cleanup Enhancement (MCP Tool Compatibility Fix)**:
@@ -1964,7 +1964,7 @@ print(response.choices[0].message.content)
         - **Protocol & Router Expansion**: Native support for OpenAI, Anthropic (Claude Code), and Gemini protocols with high-precision Model Router.
         - **Multimodal Optimization**: Deep adaptation for Imagen 3 with 100MB payload capacity and aspect ratio controls.
         - **Global Upstream Proxy**: Centralized request management supporting HTTP/SOCKS5 with hot-reloading.
-    *   See [Releases](https://github.com/lbjlaq/Antigravity-Manager/releases) for earlier history.
+    *   See [Releases](https://github.com/lbjlaq/antigravity-tools/releases) for earlier history.
 
     </details>
 ## 👥 Contributors
@@ -2010,5 +2010,5 @@ This project has referenced or learned from the ideas or code of the following e
 
 <div align="center">
   <p>If you find this tool helpful, please give it a ⭐️ on GitHub!</p>
-  <p>Copyright © 2025 Antigravity Team.</p>
+  <p>Copyright © 2025 NexusProxy Team.</p>
 </div>
